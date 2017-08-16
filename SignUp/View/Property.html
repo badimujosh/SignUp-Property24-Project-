@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+
+<h2 class=" text-center text-danger">Manage Property</h2>
+<br />
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form>
+            
+            <div class=" form-group">
+                <label for="inputDescription">Description</label>
+                <input type="text" ng-model="Description" class="form-control input-lg" placeholder="Description" />
+            </div>
+            <div class=" form-group">
+                <label for="inputNumOfBed">Number of Bed</label>
+                <input type="text" ng-model="NumOfBed" class="form-control input-lg" placeholder="Number Of Bed" />
+            </div>
+            <div class=" form-group">
+                <label for="inputNumOfBath">Number of Bathroom</label>
+                <input type="text" ng-model="NumOfBath" class="form-control input-lg" placeholder="Number of Bathroom" />
+            </div>
+            <div class=" form-group">
+                <label for="inputNumOfGarage">NumOfGarage</label>
+                <input type="text" ng-model="NumOfGarage" class="form-control input-lg" placeholder="Number of Garage" />
+            </div>
+            <div class=" form-group">
+                <label for="inputFloorSize">Floor Size</label>
+                <input type="text" ng-model="FloorSize" class="form-control input-lg" placeholder="Floor size" />
+            </div>
+            <div class=" form-group">
+                <label for="inputPrice">Price</label>
+                <input type="text" ng-model="Price" class="form-control input-lg" placeholder="Price" />
+                 </div>
+            <div class=" form-group">
+                <label for="inputCategory">Category</label>
+                <input type="text" ng-model="Category" class="form-control input-lg" placeholder="Category" />
+            </div>
+            <div class=" form-group">
+                <label for="inputMonthly_Levy">Monthly Levy</label>
+                <input type="text" ng-model="Monthly_Levy" class="form-control input-lg" placeholder="Monthly Levy" />
+            </div>
+
+            <div class=" form-group">
+                <label for="inputMonthly_Rate">Monthly Rate</label>
+                <input type="text" ng-model="Monthly_Rate" class="form-control input-lg" placeholder="Monthly Rate" />
+            </div>
+
+            <div class=" form-group">
+                <label for="inputPriceTerm">Price Term</label>
+                <input type="text" ng-model="PriceTerm" class="form-control input-lg" placeholder="Price Term" />
+
+            </div>
+
+           <div class=" form-group">
+                <label for="inputStreet">Street</label>
+                <input type="text" ng-model="Street" class="form-control input-lg" placeholder="Street and House No." />
+            </div>
+            <div class=" form-group">
+                <label for="inputCity">City</label>
+                <input type="text" ng-model="City" class="form-control input-lg" placeholder="City" />
+            </div>
+            
+            
+
+            <button ng-click="addTbProperty()" class="btn btn-success form-control input-lg">Add Property</button>
+        </form>
+    </div>
+
+</div>

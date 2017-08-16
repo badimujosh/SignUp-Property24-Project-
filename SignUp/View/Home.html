@@ -1,0 +1,24 @@
+﻿<div class="flipkart-navbar-search smallsearch col-sm-8 col-xs-11">
+
+    <input class="flipkart-navbar-input col-xs-11" placeholder="Search Property" ng-model="searchProperty" />
+
+    <br />
+    <div ng-controller="HomeController">
+
+        <table class="table">
+
+            <tr ng-repeat="r in tbProperties | filter : searchProperty">
+
+                <td>{{r.Price}}td>
+
+                <td>{{r.Category}}td>
+
+                <td>{{r.PropertyType}}td>
+
+            </tr>
+
+        </table>
+
+    </div>
+</div>
+

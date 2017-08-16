@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+  
+    <script src="Scripts/jquery-3.1.1.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.js"></script>
+     <script src="Scripts/angular-route.js"></script>
+    <script src="AgentService.js"></script>
+    <script src="agent.js"></script>
+
+    </head>
+<body>
+
+    <div class="container">
+        <nav role="navigation" class="navbar navbar-default">
+            
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#!Home">Home</a></li>
+                <li><a href="#!ToRent">To Rent</a></li>
+                <li><a href="#!ForSale">For Sale</a></li>
+                <li><a href="#!Developments">Developments</a></li>
+                <li><a href="#!Commercial">Commercial</a></li>
+                <li><a href="#!Calculators">Calculators</a></li>
+                <li><a href="#!Advice">Advice</a></li>
+                </ul>
+            <ul class="nav navbar-nav navbar-right" ng-show="!userData" >
+                <li ><a href="#!SignUp">Sign Up</a></li>
+                <li ><a href="#!LogIn" >Log In</a></li>
+                </ul> 
+            <ul class="nav navbar-nav navbar-right " ng-hide="!userData" >
+                <li><a href="#!Profile">{{profile}}</a></li>
+                <li><a href="#!Property">Manage Property</a></li>
+                <li><a href="#!Logout" ng-click="logout()">Logout</a></li>
+                
+            </ul>
+        </nav>
+                         
+        <div ng-view>
+                
+        </div>
+     
+
+             
+    </div>
+
+</body>
+</html>

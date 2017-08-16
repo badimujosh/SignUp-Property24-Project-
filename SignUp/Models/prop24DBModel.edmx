@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="propDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbAgent">
+          <Key>
+            <PropertyRef Name="Agent_ID" />
+          </Key>
+          <Property Name="Agent_ID" Type="int" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" />
+          <Property Name="MobileNum" Type="varchar" MaxLength="10" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbLocation">
+          <Key>
+            <PropertyRef Name="Location_ID" />
+          </Key>
+          <Property Name="Location_ID" Type="int" Nullable="false" />
+          <Property Name="Suburb" Type="varchar" MaxLength="100" />
+          <Property Name="City" Type="varchar" MaxLength="100" />
+          <Property Name="Province" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tbProperty">
+          <Key>
+            <PropertyRef Name="Prop_ID" />
+          </Key>
+          <Property Name="Prop_ID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="NumOfBed" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="NumOfBath" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="NumOfGarage" Type="int" />
+          <Property Name="FloorSize" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Price" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="PropertySize" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Monthly_Levy" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Monthly_Rate" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="PriceTerm" Type="varchar" MaxLength="50" />
+          <Property Name="OccupationDate" Type="date" />
+          <Property Name="Agent_ID" Type="int" Nullable="false" />
+          <Property Name="Street" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="tbSecurity">
+          <Key>
+            <PropertyRef Name="Sec_Id" />
+          </Key>
+          <Property Name="Sec_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityContainer Name="propDBStoreContainer">
+          <EntitySet Name="tbAgent" EntityType="Self.tbAgent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbLocation" EntityType="Self.tbLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbProperty" EntityType="Self.tbProperty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbSecurity" EntityType="Self.tbSecurity" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="propDB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbAgent">
+          <Key>
+            <PropertyRef Name="Agent_ID" />
+          </Key>
+          <Property Name="Agent_ID" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNum" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="prop24Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbAgents" EntityType="Self.tbAgent" />
+          <EntitySet Name="tbSecurities" EntityType="propDB.tbSecurity" />
+          <EntitySet Name="tbProperties" EntityType="propDB.tbProperty" />
+          <EntitySet Name="tbLocations" EntityType="propDB.tbLocation" />
+        </EntityContainer>
+        <EntityType Name="tbSecurity">
+          <Key>
+            <PropertyRef Name="Sec_Id" />
+          </Key>
+          <Property Name="Sec_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbProperty">
+          <Key>
+            <PropertyRef Name="Prop_ID" />
+          </Key>
+          <Property Name="Prop_ID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NumOfBed" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NumOfBath" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NumOfGarage" Type="Int32" />
+          <Property Name="FloorSize" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="PropertySize" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Monthly_Levy" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Monthly_Rate" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="PriceTerm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OccupationDate" Type="DateTime" Precision="0" />
+          <Property Name="Agent_ID" Type="Int32" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbLocation">
+          <Key>
+            <PropertyRef Name="Location_ID" />
+          </Key>
+          <Property Name="Location_ID" Type="Int32" Nullable="false" />
+          <Property Name="Suburb" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Province" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="propDBStoreContainer" CdmEntityContainer="prop24Entities">
+          <EntitySetMapping Name="tbAgents">
+            <EntityTypeMapping TypeName="propDB.tbAgent">
+              <MappingFragment StoreEntitySet="tbAgent">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="MobileNum" ColumnName="MobileNum" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Agent_ID" ColumnName="Agent_ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbSecurities">
+            <EntityTypeMapping TypeName="propDB.tbSecurity">
+              <MappingFragment StoreEntitySet="tbSecurity">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Sec_Id" ColumnName="Sec_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbProperties">
+            <EntityTypeMapping TypeName="propDB.tbProperty">
+              <MappingFragment StoreEntitySet="tbProperty">
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Agent_ID" ColumnName="Agent_ID" />
+                <ScalarProperty Name="OccupationDate" ColumnName="OccupationDate" />
+                <ScalarProperty Name="PriceTerm" ColumnName="PriceTerm" />
+                <ScalarProperty Name="Monthly_Rate" ColumnName="Monthly_Rate" />
+                <ScalarProperty Name="Monthly_Levy" ColumnName="Monthly_Levy" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="PropertySize" ColumnName="PropertySize" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="FloorSize" ColumnName="FloorSize" />
+                <ScalarProperty Name="NumOfGarage" ColumnName="NumOfGarage" />
+                <ScalarProperty Name="NumOfBath" ColumnName="NumOfBath" />
+                <ScalarProperty Name="NumOfBed" ColumnName="NumOfBed" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Prop_ID" ColumnName="Prop_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbLocations">
+            <EntityTypeMapping TypeName="propDB.tbLocation">
+              <MappingFragment StoreEntitySet="tbLocation">
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="Location_ID" ColumnName="Location_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
