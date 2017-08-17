@@ -48,7 +48,7 @@ myApp.directive('ngFiles', ['$parse', function ($parse) {
         var onChange = $parse(attrs.ngFiles);
         element.on('change', function (event)
         {
-            onChange(scope, { $files: target.files });
+            onChange(scope, { $files: event.target.files });
         })
     }
 
@@ -203,61 +203,52 @@ myApp.controller("UpdateProfileController", function ($location,$rootScope, $sco
 
 myApp.controller("PropertyController", function ($rootScope, $location, $scope, AgentApi) {
     $scope.Agent_ID = $rootScope.userData.Agent_ID;
-/*
+
     var formdata = new FormData();
 
     $scope.getTheFiles = function ($files) {
         $scope.imagesrc = [];
-    } 
-    for (var i = 0; i < $files.length; i++)
-    {
-        var reader = new FileReader();
-        reader.fileName = $files[i].name;
 
-        reader.onload = function (event) {
-            var image = {};
-            image.Name = event.target.fileName;
-            image.Size = (event.total / 1024).toFixed(2);
-            image.Src -= event.target.result;
-            $scope.imagesrc.push(image);
-            $scope.$apply();
+        for (var i = 0; i < $files.length; i++) {
+            var reader = new FileReader();
+            reader.fileName = $files[i].name;
+
+            reader.onload = function (event) {
+                var image = {};
+                image.Name = event.target.fileName;
+                image.Size = (event.total / 1024).toFixed(2);
+                image.Src -= event.target.result;
+                $scope.imagesrc.push(image);
+                $scope.$apply();
+            }
+            reader.readAsDataURL($files[i]);
         }
-        reader.readAsDataURL($files[i]);
+        angular.forEach($files, function (value, key) {
+            formdata.append(value, key);
+        })
     }
-    angular.forEach($files, function (value, key) {
-        formdata.append(value, key);
-    })*/
-
-
-
-
-
-
-
-
     $scope.addTbProperty = function (){
 
-        var propToAdd = {
+        var propToAdd =
 
-            'Description': $scope.Description,
-            'NumOfBed': $scope.NumOfBed,
-            'NumOfBath': $scope.NumOfBath,
-            'NumOfGarage': $scope.NumOfGarage,
-            'FloorSize': $scope.FloorSize,
-            'Price': $scope.Price,
-            'PropertySize': $scope.PropertySize,
-            'Category': $scope.Category,
-            'Monthly_Levy': $scope.Monthly_Levy,
-            'Monthly_Rate': $scope.Monthly_Rate,
-            'PriceTerm': $scope.PriceTerm,
-            'OccupationDate': $scope.OccupationDate,
-            'Agent_ID': $scope.Agent_ID,
-            'Photo': $scope.Photo,
-            'Type': $scope.Type,
-            'Street': $scope.Street,
-            'City': $scope.Location_ID
-        };
-        AgentApi.addProperty(propToAdd).
+            '?Description='+ $scope.Description+
+            '&NumOfBed='+ $scope.NumOfBed+
+            '&NumOfBath='+ $scope.NumOfBath+
+            '&NumOfGarage='+ $scope.NumOfGarage+
+            '&FloorSize='+ $scope.FloorSize+
+            '&Price='+ $scope.Price+
+            '&PropertySize='+ $scope.PropertySize+
+            '&Category='+ $scope.Category+
+            '&Monthly_Levy='+ $scope.Monthly_Levy+
+            '&Monthly_Rate='+ $scope.Monthly_Rate+
+            '&PriceTerm='+ $scope.PriceTerm+
+            '&OccupationDate='+ $scope.OccupationDate+
+            '&Agent_ID='+ $scope.Agent_ID+
+            //'&Type='+ $scope.Type+
+            '&Street='+ $scope.Street+
+            '&City='+ $scope.Location_ID
+        ;
+        AgentApi.addProperty(propToAdd, formdata).
             then
             (function (response) {
                 alert("New Property Added by" + $rootScope.userData.FirstName);

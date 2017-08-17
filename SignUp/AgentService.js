@@ -48,8 +48,19 @@ agentService.factory('AgentApi', function ($http)
 
     //Registration of a property
 
-    AgentApi.addProperty= function (propToAdd) {
-        return $http.post(urlAgent + '/tbProperties/', propToAdd);
+    AgentApi.addProperty = function (propToAdd, formdata) {
+        
+        var request = $http({
+
+            method: 'POST',
+            url: urlAgent + '/tbProperties/'+propToAdd,
+            data: formdata,
+            headers: {'Content-Type': undefined}
+
+        });
+
+        return request;
+
     };
 
     return AgentApi;
