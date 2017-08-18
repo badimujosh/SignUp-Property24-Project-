@@ -246,7 +246,7 @@ myApp.controller("PropertyController", function ($rootScope, $location, $scope, 
             '&Agent_ID='+ $scope.Agent_ID+
             //'&Type='+ $scope.Type+
             '&Street='+ $scope.Street+
-            '&City='+ $scope.Location_ID
+            '&City='+ $scope.City
         ;
         AgentApi.addProperty(propToAdd, formdata).
             then

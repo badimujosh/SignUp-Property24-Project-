@@ -74,9 +74,9 @@ namespace SignUp.Controllers
 
         // POST: api/tbProperties
         [ResponseType(typeof(tbProperty))]
-        public IHttpActionResult PosttbProperty(tbProperty tbProperty)
+        public IHttpActionResult PosttbProperty()
         {
-
+            tbProperty tbProperty= new tbProperty();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
