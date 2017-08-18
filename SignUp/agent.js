@@ -217,7 +217,7 @@ myApp.controller("PropertyController", function ($rootScope, $location, $scope, 
                 var image = {};
                 image.Name = event.target.fileName;
                 image.Size = (event.total / 1024).toFixed(2);
-                image.Src -= event.target.result;
+                image.Src = event.target.result;
                 $scope.imagesrc.push(image);
                 $scope.$apply();
             }
@@ -227,6 +227,8 @@ myApp.controller("PropertyController", function ($rootScope, $location, $scope, 
             formdata.append(value, key);
         })
     }
+
+
     $scope.addTbProperty = function (){
 
         var propToAdd =
