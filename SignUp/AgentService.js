@@ -2,7 +2,7 @@
 
 var agentService = angular.module('agentService', []);
 
-agentService.factory('AgentApi', function ($http)
+agentService.factory('AgentApi', function ($http,$q)
 
 {
     var urlAgent = "http://localhost:4250/api";
@@ -48,20 +48,29 @@ agentService.factory('AgentApi', function ($http)
 
     //Registration of a property
 
-    AgentApi.addProperty = function (propToAdd, formdata) {
+    AgentApi.addProperty = function (propToAdd) {
         
-        var request = $http({
-
-            method: 'POST',
-            url: urlAgent + '/tbProperties/'+propToAdd,
-            data: formdata,
-            headers: {'Content-Type': undefined}
-
-        });
-
-        return request;
+        return $http.post(urlAgent + '/tbProperties/', propToAdd);
 
     };
+
+
+    //Upload Image in table Image
+
+
+
+
+    AgentApi.UploadFile = function () {
+
+
+        return $http.post(urlAgent + 'Image', fData,
+            {
+                headers: { 'Content-Type': undefined },
+                transformRequest: angular.identity
+            });
+
+    };
+
 
     return AgentApi;
 });

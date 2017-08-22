@@ -30,6 +30,5 @@ namespace SignUp.Models
         public int Agent_ID { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
-        public byte[] Photo { get; set; }
     }
 }

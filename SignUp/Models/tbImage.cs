@@ -12,10 +12,10 @@ namespace SignUp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbSecurity
+    public partial class tbImage
     {
-        public int Sec_Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public int ImageID { get; set; }
+        public string FileName { get; set; }
+        public Nullable<int> Prop_ID { get; set; }
     }
 }

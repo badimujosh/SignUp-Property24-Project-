@@ -1,0 +1,15 @@
+﻿<!DOCTYPE html>
+<h1 class=" text-center text-danger">Upload Image</h1>
+<br/>
+<div class="row">
+
+ 
+    <div class=" form-group">
+        <input type="file" ng-model="myFile" accept="image/*" onchange="angular.element(this).scope().selectFileforUpload(this.files)" />
+
+     </div>
+    <div class=" form-group">
+        <button ng-click="SaveFile()" class="btn btn-success form-control input-lg">Upload Image</button>
+    </div>
+
+  </div>

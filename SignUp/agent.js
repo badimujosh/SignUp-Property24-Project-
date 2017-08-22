@@ -32,10 +32,10 @@ myApp.config(['$routeProvider',
                 templateUrl: 'View/Property.html',
                 controller: 'PropertyController'
             }).
-            when('/Logout',
+            when('/Upload',
             {
-               // templateUrl: 'View/Property.html',
-                controller: 'LogOutController'
+               templateUrl: 'View/UploadImage.html',
+               controller: 'ImageController'
             }).
 
             otherwise({ redirectTo: '/Home' });
@@ -204,59 +204,33 @@ myApp.controller("UpdateProfileController", function ($location,$rootScope, $sco
 myApp.controller("PropertyController", function ($rootScope, $location, $scope, AgentApi) {
     $scope.Agent_ID = $rootScope.userData.Agent_ID;
 
-    var formdata = new FormData();
+     $scope.addTbProperty = function (){
 
-    $scope.getTheFiles = function ($files) {
-        $scope.imagesrc = [];
+        var propToAdd = {
 
-        for (var i = 0; i < $files.length; i++) {
-            var reader = new FileReader();
-            reader.fileName = $files[i].name;
-
-            reader.onload = function (event) {
-                var image = {};
-                image.Name = event.target.fileName;
-                image.Size = (event.total / 1024).toFixed(2);
-                image.Src = event.target.result;
-                $scope.imagesrc.push(image);
-                $scope.$apply();
-            }
-            reader.readAsDataURL($files[i]);
-        }
-        angular.forEach($files, function (value, key) {
-            formdata.append(value, key);
-        })
-    }
-
-
-    $scope.addTbProperty = function (){
-
-        var propToAdd =
-
-            '?Description='+ $scope.Description+
-            '&NumOfBed='+ $scope.NumOfBed+
-            '&NumOfBath='+ $scope.NumOfBath+
-            '&NumOfGarage='+ $scope.NumOfGarage+
-            '&FloorSize='+ $scope.FloorSize+
-            '&Price='+ $scope.Price+
-            '&PropertySize='+ $scope.PropertySize+
-            '&Category='+ $scope.Category+
-            '&Monthly_Levy='+ $scope.Monthly_Levy+
-            '&Monthly_Rate='+ $scope.Monthly_Rate+
-            '&PriceTerm='+ $scope.PriceTerm+
-            '&OccupationDate='+ $scope.OccupationDate+
-            '&Agent_ID='+ $scope.Agent_ID+
-            //'&Type='+ $scope.Type+
-            '&Street='+ $scope.Street+
-            '&City='+ $scope.City
-        ;
-        AgentApi.addProperty(propToAdd, formdata).
+            'Description': $scope.Description,
+            'NumOfBed': $scope.NumOfBed,
+            'NumOfBath': $scope.NumOfBath,
+            'NumOfGarage': $scope.NumOfGarage,
+            'FloorSize': $scope.FloorSize,
+            'Price': $scope.Price,
+            'PropertySize': $scope.PropertySize,
+            'Category' : $scope.Category,
+            'Monthly_Levy' :$scope.Monthly_Levy,
+            'Monthly_Rate' : $scope.Monthly_Rate,
+            'PriceTerm' : $scope.PriceTerm,
+            'OccupationDate' : $scope.OccupationDate,
+            'Agent_ID' : $scope.Agent_ID,
+            'Street' : $scope.Street,
+            'City' : $scope.City
+        };
+        AgentApi.addProperty(propToAdd).
             then
             (function (response) {
                 alert("New Property Added by" + $rootScope.userData.FirstName);
                
                 $rootScope.userData = $rootScope.userData + response.data;
-                $location.path('/Home');
+                $location.path('/Upload');
                 
 
             }),
@@ -265,6 +239,55 @@ myApp.controller("PropertyController", function ($rootScope, $location, $scope, 
             };
 
     };
+
+});
+
+myApp.controller("ImageController", function ($rootScope, $location, $scope, AgentApi) {
+    $scope.Prop_ID = $rootScope.userData.Prop_ID;
+    var fData = new FormData();
+
+
+
+    $scope.selectFileforUpload = function (file) {
+       
+        $scope.Imagename = files.name;
+        var reader = new FileReader();
+        reader.onload = function (event)
+        {
+            $scope.$apply(function ($scope) {
+                $scope.files = element.files;
+                $scope.src = event.target.result;
+            });
+        }
+        reader.readAsDataURL(element.files[0]);
+      //  $scope.selectFileforUpload = file[0];
+    }
+    fData.append('file', file);
+
+    $scope.SaveFile = function () {
+
+        AgentApi.UploadFile(fdata)
+            .then
+            (function (response) {
+                /*var ItmDetails = {
+                    'FileName': $scope.Imagename,
+                    'Prop_ID': $scope.Prop_ID
+                };
+                AgentApi.UploadFile(ItmDetails).
+                    then
+                    (function (repoonse)
+                    {
+                        alert("Image Added");
+                    })
+                */
+                alert("Image Added")
+
+            })
+    };
+
+              
+               
+              
 
 });
 

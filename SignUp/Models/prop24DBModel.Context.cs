@@ -26,8 +26,8 @@ namespace SignUp.Models
         }
     
         public virtual DbSet<tbAgent> tbAgents { get; set; }
-        public virtual DbSet<tbSecurity> tbSecurities { get; set; }
         public virtual DbSet<tbProperty> tbProperties { get; set; }
         public virtual DbSet<tbLocation> tbLocations { get; set; }
+        public virtual DbSet<tbImage> tbImages { get; set; }
     }
 }

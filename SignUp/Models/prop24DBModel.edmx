@@ -17,6 +17,14 @@
           <Property Name="MobileNum" Type="varchar" MaxLength="10" />
           <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbImage">
+          <Key>
+            <PropertyRef Name="ImageID" />
+          </Key>
+          <Property Name="ImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="100" />
+          <Property Name="Prop_ID" Type="int" />
+        </EntityType>
         <EntityType Name="tbLocation">
           <Key>
             <PropertyRef Name="Location_ID" />
@@ -46,21 +54,12 @@
           <Property Name="Agent_ID" Type="int" Nullable="false" />
           <Property Name="Street" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="City" Type="varchar" MaxLength="250" />
-          <Property Name="Photo" Type="image" />
-        </EntityType>
-        <EntityType Name="tbSecurity">
-          <Key>
-            <PropertyRef Name="Sec_Id" />
-          </Key>
-          <Property Name="Sec_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="varchar" MaxLength="100" />
-          <Property Name="Password" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityContainer Name="propDBStoreContainer">
           <EntitySet Name="tbAgent" EntityType="Self.tbAgent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbImage" EntityType="Self.tbImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbLocation" EntityType="Self.tbLocation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbProperty" EntityType="Self.tbProperty" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tbSecurity" EntityType="Self.tbSecurity" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -80,18 +79,10 @@
         </EntityType>
         <EntityContainer Name="prop24Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbAgents" EntityType="Self.tbAgent" />
-          <EntitySet Name="tbSecurities" EntityType="propDB.tbSecurity" />
           <EntitySet Name="tbProperties" EntityType="propDB.tbProperty" />
           <EntitySet Name="tbLocations" EntityType="propDB.tbLocation" />
+          <EntitySet Name="tbImages" EntityType="propDB.tbImage" />
         </EntityContainer>
-        <EntityType Name="tbSecurity">
-          <Key>
-            <PropertyRef Name="Sec_Id" />
-          </Key>
-          <Property Name="Sec_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="tbProperty">
           <Key>
             <PropertyRef Name="Prop_ID" />
@@ -112,7 +103,6 @@
           <Property Name="Agent_ID" Type="Int32" Nullable="false" />
           <Property Name="Street" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="City" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="tbLocation">
           <Key>
@@ -122,6 +112,14 @@
           <Property Name="Suburb" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Province" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbImage">
+          <Key>
+            <PropertyRef Name="ImageID" />
+          </Key>
+          <Property Name="ImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Prop_ID" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -142,19 +140,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbSecurities">
-            <EntityTypeMapping TypeName="propDB.tbSecurity">
-              <MappingFragment StoreEntitySet="tbSecurity">
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Sec_Id" ColumnName="Sec_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbProperties">
             <EntityTypeMapping TypeName="propDB.tbProperty">
               <MappingFragment StoreEntitySet="tbProperty">
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Street" ColumnName="Street" />
                 <ScalarProperty Name="Agent_ID" ColumnName="Agent_ID" />
@@ -181,6 +169,15 @@
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Suburb" ColumnName="Suburb" />
                 <ScalarProperty Name="Location_ID" ColumnName="Location_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbImages">
+            <EntityTypeMapping TypeName="propDB.tbImage">
+              <MappingFragment StoreEntitySet="tbImage">
+                <ScalarProperty Name="Prop_ID" ColumnName="Prop_ID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ImageID" ColumnName="ImageID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

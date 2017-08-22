@@ -969,12 +969,14 @@
     <Content Include="View\Profile.html" />
     <Content Include="View\Property.html" />
     <Content Include="View\SignUp.html" />
+    <Content Include="View\UploadImage.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\tbAgentsController.cs" />
     <Compile Include="Controllers\tbPropertiesController.cs" />
     <Compile Include="ErrorHandler\AiHandleErrorAttribute.cs" />
@@ -997,17 +999,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>prop24DBModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\SecurityData.cs" />
     <Compile Include="Models\tbAgent.cs">
+      <DependentUpon>prop24DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbImage.cs">
       <DependentUpon>prop24DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbLocation.cs">
       <DependentUpon>prop24DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbProperty.cs">
-      <DependentUpon>prop24DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbSecurity.cs">
       <DependentUpon>prop24DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

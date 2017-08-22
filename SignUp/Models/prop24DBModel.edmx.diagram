@@ -6,9 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="ca34645b14794104b2c80b701f384154" Name="Diagram1" ZoomLevel="98">
         <EntityTypeShape EntityType="propDB.tbAgent" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="propDB.tbSecurity" Width="1.5" PointX="3.375" PointY="0.875" />
         <EntityTypeShape EntityType="propDB.tbProperty" Width="1.5" PointX="3.25" PointY="3.125" />
         <EntityTypeShape EntityType="propDB.tbLocation" Width="1.5" PointX="0.875" PointY="5.125" />
+        <EntityTypeShape EntityType="propDB.tbImage" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
