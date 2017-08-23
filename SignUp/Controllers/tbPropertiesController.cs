@@ -87,7 +87,9 @@ namespace SignUp.Controllers
 
             try
             {
+                
                 db.SaveChanges();
+               
             }
             catch (DbUpdateException)
             {
@@ -101,7 +103,12 @@ namespace SignUp.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = tbProperty.Prop_ID }, tbProperty);
+
+           return CreatedAtRoute("DefaultApi", new { id = tbProperty.Prop_ID }, tbProperty);
+
+
+           
+
         }
 
         // DELETE: api/tbProperties/5

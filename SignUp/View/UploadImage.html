@@ -3,13 +3,35 @@
 <br/>
 <div class="row">
 
- 
-    <div class=" form-group">
-        <input type="file" ng-model="myFile" accept="image/*" onchange="angular.element(this).scope().selectFileforUpload(this.files)" />
-
-     </div>
-    <div class=" form-group">
-        <button ng-click="SaveFile()" class="btn btn-success form-control input-lg">Upload Image</button>
+    <div class="panel panel-info">
+        <div class="panel-body">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <td> Title </td>
+                        <td> Image </td>
+                        <td> Size </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="image in imagesrc track by $index">
+                        <td>{{image.Name}}</td>
+                        <td>
+                            <img ng-src="{{image.Src}}" title="{{image.Title}}" style="width:100px;" />
+                        </td>
+                        <td>{{image.Size}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-lg-7">
+                    <input type="file" multiple ng-files="getTheFiles($files)" />
+                </div>
+                <div class="col-lg-5">
+                    <input ng-disabled="!imagesrc.length" type="button" class="btn btn-success" ng-click="uploadFiles()" value="Upload" />
+                    <input ng-disabled="!imagesrc.length" type="button" class="btn btn-success" ng-click="reset()" value="Cancel" />
+                </div>
+            </div>
+        </div>
     </div>
-
-  </div>
+</div>

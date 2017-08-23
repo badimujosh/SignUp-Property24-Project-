@@ -227,9 +227,11 @@ myApp.controller("PropertyController", function ($rootScope, $location, $scope, 
         AgentApi.addProperty(propToAdd).
             then
             (function (response) {
-                alert("New Property Added by" + $rootScope.userData.FirstName);
+                
+                alert("New Property Added by " + $rootScope.userData.FirstName);
                
                 $rootScope.userData = $rootScope.userData + response.data;
+                alert($rootScope.userData);
                 $location.path('/Upload');
                 
 
@@ -244,48 +246,53 @@ myApp.controller("PropertyController", function ($rootScope, $location, $scope, 
 
 myApp.controller("ImageController", function ($rootScope, $location, $scope, AgentApi) {
     $scope.Prop_ID = $rootScope.userData.Prop_ID;
-    var fData = new FormData();
+   
+    var formdata = new FormData();
 
+    //get images for viewing
+    $scope.getTheFiles = function ($files) {
+        $scope.imagesrc = [];
 
+        for (var i = 0; i < $files.length; i++) {
+            var reader = new FileReader();
 
-    $scope.selectFileforUpload = function (file) {
-       
-        $scope.Imagename = files.name;
-        var reader = new FileReader();
-        reader.onload = function (event)
-        {
-            $scope.$apply(function ($scope) {
-                $scope.files = element.files;
-                $scope.src = event.target.result;
-            });
+            reader.fileName = $files[i].name;
+            reader.onload = function (event) {
+                var image = {};
+                image.Name = event.target.fileName;
+                image.Size = (event.total / 1024).toFixed(2);
+                image.Src = event.target.result;
+                $scope.imagesrc.push(image);
+                $scope.$apply();
+
+            }
+
+            reader.readAsDataURL($files[i]);
         }
-        reader.readAsDataURL(element.files[0]);
-      //  $scope.selectFileforUpload = file[0];
+        angular.forEach($files, function (value, key) {
+
+            formdata.append(key, value);
+
+        })
+    } 
+
+    $scope.uploadFiles = function () {
+
+        var myDataQuery = "?Prop_ID=" + $scope.Prop_ID;
+        
+
+        //call service function
+        AgentApi.UploadImages(formdata, myDataQuery).then(function (d) {
+            alert(d.data);
+            $scope.reset();
+            $location.path("/Home");
+
+        }), function () {
+            alert("Failed");
+            $scope.reset();
+        };
+
     }
-    fData.append('file', file);
-
-    $scope.SaveFile = function () {
-
-        AgentApi.UploadFile(fdata)
-            .then
-            (function (response) {
-                /*var ItmDetails = {
-                    'FileName': $scope.Imagename,
-                    'Prop_ID': $scope.Prop_ID
-                };
-                AgentApi.UploadFile(ItmDetails).
-                    then
-                    (function (repoonse)
-                    {
-                        alert("Image Added");
-                    })
-                */
-                alert("Image Added")
-
-            })
-    };
-
-              
                
               
 

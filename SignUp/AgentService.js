@@ -43,9 +43,6 @@ agentService.factory('AgentApi', function ($http,$q)
     };
 
 
-
-
-
     //Registration of a property
 
     AgentApi.addProperty = function (propToAdd) {
@@ -57,21 +54,21 @@ agentService.factory('AgentApi', function ($http,$q)
 
     //Upload Image in table Image
 
+    
+    AgentApi.UploadImages = function (formdata, myDataQuery) {
 
+        var request = {
+            method: 'POST',
+            url: urlAgent + '/Image' + myDataQuery,
+            data: formdata,
+            headers: {
+                'Content-Type': undefined
+            }
+        };
 
-
-    AgentApi.UploadFile = function () {
-
-
-        return $http.post(urlAgent + 'Image', fData,
-            {
-                headers: { 'Content-Type': undefined },
-                transformRequest: angular.identity
-            });
+        return $http(request);
 
     };
-
-
     return AgentApi;
 });
  

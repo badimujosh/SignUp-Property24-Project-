@@ -17,12 +17,12 @@
           <Property Name="MobileNum" Type="varchar" MaxLength="10" />
           <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="tbImage">
+        <EntityType Name="tbImageProp">
           <Key>
             <PropertyRef Name="ImageID" />
           </Key>
-          <Property Name="ImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FileName" Type="varchar" MaxLength="100" />
+          <Property Name="ImageID" Type="int" Nullable="false" />
+          <Property Name="ImageDetail" Type="image" />
           <Property Name="Prop_ID" Type="int" />
         </EntityType>
         <EntityType Name="tbLocation">
@@ -57,7 +57,7 @@
         </EntityType>
         <EntityContainer Name="propDBStoreContainer">
           <EntitySet Name="tbAgent" EntityType="Self.tbAgent" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tbImage" EntityType="Self.tbImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbImageProp" EntityType="Self.tbImageProp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbLocation" EntityType="Self.tbLocation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbProperty" EntityType="Self.tbProperty" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -81,7 +81,7 @@
           <EntitySet Name="tbAgents" EntityType="Self.tbAgent" />
           <EntitySet Name="tbProperties" EntityType="propDB.tbProperty" />
           <EntitySet Name="tbLocations" EntityType="propDB.tbLocation" />
-          <EntitySet Name="tbImages" EntityType="propDB.tbImage" />
+          <EntitySet Name="tbImageProps" EntityType="propDB.tbImageProp" />
         </EntityContainer>
         <EntityType Name="tbProperty">
           <Key>
@@ -113,12 +113,12 @@
           <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Province" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="tbImage">
+        <EntityType Name="tbImageProp">
           <Key>
             <PropertyRef Name="ImageID" />
           </Key>
-          <Property Name="ImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FileName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ImageID" Type="Int32" Nullable="false" />
+          <Property Name="ImageDetail" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Prop_ID" Type="Int32" />
         </EntityType>
       </Schema>
@@ -172,11 +172,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbImages">
-            <EntityTypeMapping TypeName="propDB.tbImage">
-              <MappingFragment StoreEntitySet="tbImage">
+          <EntitySetMapping Name="tbImageProps">
+            <EntityTypeMapping TypeName="propDB.tbImageProp">
+              <MappingFragment StoreEntitySet="tbImageProp">
                 <ScalarProperty Name="Prop_ID" ColumnName="Prop_ID" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ImageDetail" ColumnName="ImageDetail" />
                 <ScalarProperty Name="ImageID" ColumnName="ImageID" />
               </MappingFragment>
             </EntityTypeMapping>

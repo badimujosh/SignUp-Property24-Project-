@@ -28,6 +28,6 @@ namespace SignUp.Models
         public virtual DbSet<tbAgent> tbAgents { get; set; }
         public virtual DbSet<tbProperty> tbProperties { get; set; }
         public virtual DbSet<tbLocation> tbLocations { get; set; }
-        public virtual DbSet<tbImage> tbImages { get; set; }
+        public virtual DbSet<tbImageProp> tbImageProps { get; set; }
     }
 }
