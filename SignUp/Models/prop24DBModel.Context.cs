@@ -12,6 +12,8 @@ namespace SignUp.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class prop24Entities : DbContext
     {
@@ -29,5 +31,10 @@ namespace SignUp.Models
         public virtual DbSet<tbProperty> tbProperties { get; set; }
         public virtual DbSet<tbLocation> tbLocations { get; set; }
         public virtual DbSet<tbImageProp> tbImageProps { get; set; }
+    
+        public virtual ObjectResult<GetProperty_Result> GetProperty()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProperty_Result>("GetProperty");
+        }
     }
 }

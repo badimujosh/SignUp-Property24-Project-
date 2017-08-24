@@ -10,7 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using SignUp.Models;
 using System.Web.Mvc;
-
+using System.Net.Mail;
 
 namespace SignUp.Controllers
 {
@@ -146,10 +146,47 @@ namespace SignUp.Controllers
         {
             return db.tbAgents.Count(e => e.Agent_ID == id) > 0;
         }
+
+
+
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.AllowAnonymous]
+        public string PostSendGmail()
+        {
+            SmtpClient client = new SmtpClient();
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.EnableSsl = true;
+            client.Host = "smtp.live.com";
+            client.Port = 587;
+            // setup Smtp authentication
+            System.Net.NetworkCredential credentials =
+                new System.Net.NetworkCredential("josue_star3@hotmail.com", "adonis14");
+            client.UseDefaultCredentials = false;
+            client.Credentials = credentials;
+            //can be obtained from your model
+            MailMessage msg = new MailMessage();
+            msg.From = new MailAddress("your_account@gmail.com");
+            msg.To.Add(new MailAddress("destination_address@someserver.com"));
+
+            msg.Subject = "Message from A.info";
+            msg.IsBodyHtml = true;
+            msg.Body = string.Format("<html><head></head><body><b>Message Email</b></body>");
+            try
+            {
+                client.Send(msg);
+                return "OK";
+            }
+            catch (Exception ex)
+            {
+
+                return "error:" + ex.ToString();
+            }
+        }
     };
 
+  
 
-   
+
 
 
 }

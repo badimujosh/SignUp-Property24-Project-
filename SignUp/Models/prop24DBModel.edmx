@@ -55,6 +55,7 @@
           <Property Name="Street" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="City" Type="varchar" MaxLength="250" />
         </EntityType>
+        <Function Name="GetProperty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="propDBStoreContainer">
           <EntitySet Name="tbAgent" EntityType="Self.tbAgent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbImageProp" EntityType="Self.tbImageProp" Schema="dbo" store:Type="Tables" />
@@ -82,6 +83,7 @@
           <EntitySet Name="tbProperties" EntityType="propDB.tbProperty" />
           <EntitySet Name="tbLocations" EntityType="propDB.tbLocation" />
           <EntitySet Name="tbImageProps" EntityType="propDB.tbImageProp" />
+          <FunctionImport Name="GetProperty" ReturnType="Collection(propDB.GetProperty_Result)" />
         </EntityContainer>
         <EntityType Name="tbProperty">
           <Key>
@@ -121,6 +123,16 @@
           <Property Name="ImageDetail" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Prop_ID" Type="Int32" />
         </EntityType>
+        <ComplexType Name="GetProperty_Result">
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="100" />
+          <Property Type="Decimal" Name="NumOfBed" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="NumOfBath" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Street" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="PriceTerm" Nullable="true" MaxLength="50" />
+          <Property Type="Binary" Name="ImageDetail" Nullable="true" MaxLength="Max" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -181,6 +193,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetProperty" FunctionName="propDB.Store.GetProperty">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="propDB.GetProperty_Result">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NumOfBed" ColumnName="NumOfBed" />
+                <ScalarProperty Name="NumOfBath" ColumnName="NumOfBath" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PriceTerm" ColumnName="PriceTerm" />
+                <ScalarProperty Name="ImageDetail" ColumnName="ImageDetail" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

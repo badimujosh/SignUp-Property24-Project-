@@ -1,24 +1,39 @@
-﻿<div class="flipkart-navbar-search smallsearch col-sm-8 col-xs-11">
+﻿<h2 class="text-left text-danger"> Find Your Property</h2>
+    <div class="flipkart-navbar-search smallsearch col-sm-8 col-xs-11">
+       
 
-    <input class="flipkart-navbar-input col-xs-11" placeholder="Search Property" ng-model="searchProperty" />
+        <input class="flipkart-navbar-input col-xs-11" placeholder="Search Property" ng-model="searchProperty" />
 
-    <br />
-    <div ng-controller="HomeController">
+        <br />
+        <div ng-controller="HomeController">
 
-        <table class="table">
+            <table class="table table-hover">
+                <thead>
+                    <tr class=" flipkart-navbar-input">
+                        <th>Description</th>
+                        <th>No Bed</th>
+                        <th>No Bath</th>
+                        <th>Price</th>
+                        <th>Street</th>
+                        <th>City</th>
+                        <th>Price Term</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="r in tbProperties | filter : searchProperty">
+                        <td>{{r. Description}}</td>
+                        <td>{{r.NumOfBed}}</td>
+                        <td>{{r.NumOfBath}}</td>
+                        <td>{{r.Price}}</td>
+                        <td>{{r. Street}}</td>
+                        <td>{{r.City}}</td>
+                        <td>{{r. PriceTerm}}</td>
+                    </tr>
+                </tbody>
 
-            <tr ng-repeat="r in tbProperties | filter : searchProperty">
 
-                <td>{{r.Price}}td>
+             </table>
 
-                <td>{{r.Category}}td>
-
-                <td>{{r.PropertyType}}td>
-
-            </tr>
-
-        </table>
-
+        </div>
     </div>
-</div>
-

@@ -984,6 +984,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetProperty_Result.cs">
+      <DependentUpon>prop24DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\prop24DBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

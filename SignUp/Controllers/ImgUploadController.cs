@@ -32,7 +32,7 @@ namespace SignUp.Controllers
 
                 string fileName = new FileInfo(file.FileName).Name;
 
-                String prop_ID = url.Split('=')[1];
+                //String prop_ID = url.Split('=')[1];
 
                 if (file.ContentLength > 0)
                 {
@@ -42,9 +42,9 @@ namespace SignUp.Controllers
 
                     byte[] imageBuffer = new byte[file.ContentLength];
                     file.InputStream.Read(imageBuffer, 0, file.ContentLength);
-
-                    obj.Prop_ID = Convert.ToInt32(prop_ID);
                     obj.ImageDetail = imageBuffer;
+                    // obj.Prop_ID = Convert.ToInt32(prop_ID);
+                    db.SaveChanges();
                     
 
                     counter++;

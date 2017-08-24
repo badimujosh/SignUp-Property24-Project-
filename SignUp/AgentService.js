@@ -39,7 +39,13 @@ agentService.factory('AgentApi', function ($http,$q)
     // Get All the properties in tbl property (Search Properties Section)
 
     AgentApi.getProperties = function () {
-       // return $http.get(urlAgent + '/tbProperties');
+       return $http.get(urlAgent + '/GetAll');
+    };
+
+    // Get Method in order to retrieve the prop_ID
+    AgentApi.getProp()= function(){
+        return $http.get(urlAgent + "/tbProperties" + "?Description=" + Desc + "&NumOfBed=" + NoBed + "&NumOfBath" + NoBath + "&NumOfGarage" + NoGarage + "&FloorSize" + fSize + "&Price" + Price + "&PropertySize" + pSize + "&Category" + Cat + "&Monthly_Levy" + MonthLevy + "&Monthly_Rate" + MonthlyRate + "&PriceTerm" + PriceT + "&OccupationDate" + OccupDate + "&Agent_ID" + A_ID + "&Street" + Street + "&City" + City
+        )
     };
 
 
@@ -55,11 +61,11 @@ agentService.factory('AgentApi', function ($http,$q)
     //Upload Image in table Image
 
     
-    AgentApi.UploadImages = function (formdata, myDataQuery) {
+    AgentApi.UploadImages = function (formdata) {
 
         var request = {
             method: 'POST',
-            url: urlAgent + '/Image' + myDataQuery,
+            url: urlAgent + '/Image',
             data: formdata,
             headers: {
                 'Content-Type': undefined

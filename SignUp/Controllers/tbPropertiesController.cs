@@ -90,6 +90,7 @@ namespace SignUp.Controllers
                 
                 db.SaveChanges();
                
+
             }
             catch (DbUpdateException)
             {
@@ -104,7 +105,9 @@ namespace SignUp.Controllers
             }
 
 
-           return CreatedAtRoute("DefaultApi", new { id = tbProperty.Prop_ID }, tbProperty);
+            return CreatedAtRoute("DefaultApi", new { id = tbProperty.Prop_ID }, tbProperty);
+            
+
 
 
            
@@ -140,5 +143,19 @@ namespace SignUp.Controllers
         {
             return db.tbProperties.Count(e => e.Prop_ID == id) > 0;
         }
+
+
+
+        [HttpGet]
+        [Route("api/GetAll")]
+        public IEnumerable<GetProperty_Result> Get()
+        {
+           
+            return db.GetProperty().AsEnumerable();
+
+
+        }
+
+
     }
 }

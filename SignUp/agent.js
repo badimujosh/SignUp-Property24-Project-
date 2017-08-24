@@ -60,18 +60,11 @@ myApp.directive('ngFiles', ['$parse', function ($parse) {
 }])
 //filtering section of the properties based on the user request
 myApp.controller("HomeController", function ($rootScope,$location,$scope, AgentApi) {
-   /* $scope.LogOut = function () {
-        $rootScope.userData = false;
-        $location.path('/Home');
-
-    };
-   
-    $scope.message = "Home";
-    */
+  
     getAlltbProperties();
     function getAlltbProperties() {
-        AgentApi.getProperties().then(function (property) {
-            $scope.tbProperties = property;
+        AgentApi.getProperties().then(function (response) {
+            $scope.tbProperties = response.data;
         }),
             function (response) {
             alert("error in adding");
@@ -106,7 +99,7 @@ myApp.controller("SignUpController", function ($location,$scope, AgentApi) {
    
 });
 
-myApp.controller("LogInController", function ($location,$rootScope,$scope, AgentApi) {
+myApp.controller("LogInController", function ($location, $rootScope, $scope, AgentApi) {
 
     $scope.gettbAgents = function () {
 
@@ -123,6 +116,7 @@ myApp.controller("LogInController", function ($location,$rootScope,$scope, Agent
                     alert("Successfully Logged In " + response.data.Email);
 
                     $rootScope.userData = response.data;
+                  //  $localStorage = $rootScope.userData;
                     alert(JSON.stringify($rootScope.userData));
 
                     $rootScope.profile = response.data.Email;
@@ -162,7 +156,7 @@ myApp.controller("LogOutController", function ($rootScope,$location,$scope) {
 
 
 // update Agent Details Section
-myApp.controller("UpdateProfileController", function ($location,$rootScope, $scope, AgentApi)
+myApp.controller("UpdateProfileController", function ($location, $rootScope, $scope, AgentApi)
 {
     $scope.FirstName = $rootScope.userData.FirstName;
     $scope.LastName = $rootScope.userData.LastName;
@@ -190,7 +184,7 @@ myApp.controller("UpdateProfileController", function ($location,$rootScope, $sco
                 alert('You have updated your profile ' + agentUpdate.FirstName);
                 $rootScope.userData= agentUpdate;
                 $rootScope.profile = agentUpdate.Email;
-
+                $localStorage = agentUpdate;
                 $location.path('/Home');
             }),
             function (response)
@@ -202,6 +196,7 @@ myApp.controller("UpdateProfileController", function ($location,$rootScope, $sco
 //Manage Property Section
 
 myApp.controller("PropertyController", function ($rootScope, $location, $scope, AgentApi) {
+  //  $scope.Agent_ID = $localStorage.userData.Agent_ID;
     $scope.Agent_ID = $rootScope.userData.Agent_ID;
 
      $scope.addTbProperty = function (){
@@ -227,11 +222,20 @@ myApp.controller("PropertyController", function ($rootScope, $location, $scope, 
         AgentApi.addProperty(propToAdd).
             then
             (function (response) {
+                AgentApi.getProp($scope.Description, $scope.NumOfBed, $scope.NumOfBath, $scope.NumOfGarage, $scope.FloorSize,
+                    $scope.Price, $scope.PropertySize, $scope.Category, $scope.Monthly_Levy, $scope.Monthly_Rate,
+                    $scope.PriceTerm, $scope.OccupationDate, $scope.Agent_ID, $scope.Street, $scope.City).
+                    then(function (response) {
+                        $rootScope.userData = userData + response.data
+                    }
+                    );
+                
+                
                 
                 alert("New Property Added by " + $rootScope.userData.FirstName);
-               
-                $rootScope.userData = $rootScope.userData + response.data;
-                alert($rootScope.userData);
+              // $localStorage= $localStorage
+               // $rootScope.userData = $rootScope.userData + response.data;
+             //   alert($rootScope.userData);
                 $location.path('/Upload');
                 
 
@@ -282,7 +286,7 @@ myApp.controller("ImageController", function ($rootScope, $location, $scope, Age
         
 
         //call service function
-        AgentApi.UploadImages(formdata, myDataQuery).then(function (d) {
+        AgentApi.UploadImages(formdata).then(function (d) {
             alert(d.data);
             $scope.reset();
             $location.path("/Home");
